@@ -77,9 +77,9 @@ h1,h2,h3{font-weight:700;color:#000}
   .phone-page{display:none;background:#fdf9f3;border-radius:12px;border:1px solid #ccc;box-shadow:0 2px 12px rgba(0,0,0,.1);width:100%;max-width:560px;overflow-y:auto;-webkit-overflow-scrolling:touch;position:relative}
   .phone-page.active{display:block}
   .pp{padding:20px 18px 48px}
-  .phone-dots{display:flex;justify-content:center;align-items:center;gap:8px;height:36px;flex-shrink:0;background:#e8e8e8}
-  .phone-dot{width:8px;height:8px;border-radius:50%;background:#bbb;border:none;padding:0;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background .2s}
-  .phone-dot.active{background:#111;transform:scale(1.2)}
+  .phone-dots{display:flex;justify-content:center;align-items:center;gap:6px;flex:1}
+  .phone-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.35);border:none;padding:0;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:all .2s}
+  .phone-dot.active{background:#fff;transform:scale(1.25)}
   .p-portrait{width:80px}
   .body{font-size:15px;line-height:1.85;color:#333;word-break:keep-all;text-align:justify}
   .body p{margin-bottom:12px}
@@ -104,14 +104,11 @@ h1,h2,h3{font-weight:700;color:#000}
 
 <nav class="phone-nav">
   <button id="p-btn-prev" onclick="phoneGo(-1)" disabled>← 이전</button>
-  <span id="pinfo"></span>
-  <div style="display:flex;gap:6px">
-    <button onclick="toggleFS()" id="p-btn-fs">전체화면</button>
-    <button id="p-btn-next" onclick="phoneGo(1)">다음 →</button>
-  </div>
+  <div class="phone-dots" id="phone-dots"></div>
+  <button onclick="toggleFS()" id="p-btn-fs">전체화면</button>
+  <button id="p-btn-next" onclick="phoneGo(1)">다음 →</button>
 </nav>
 <div class="phone-wrap" id="phone-wrap"></div>
-<div class="phone-dots" id="phone-dots"></div>
 
 <script>
 const papers=[
