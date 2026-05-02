@@ -40,6 +40,14 @@ h1,h2,h3{font-weight:700;color:#000}
 .dots{display:flex;justify-content:center;align-items:center;gap:8px;height:36px;flex-shrink:0;background:#e8e8e8}
 .dot{width:8px;height:8px;border-radius:50%;background:#bbb;border:none;padding:0;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background .2s}
 .dot.active{background:#111;transform:scale(1.2)}
+
+/* 전체화면 시 여백 채우기 */
+:-webkit-full-screen .wrap{padding:8px 6px 4px}
+:-webkit-full-screen .page{max-width:min(1000px,96vw)}
+:-webkit-full-screen .p{padding:24px 28px 56px}
+:fullscreen .wrap{padding:8px 6px 4px}
+:fullscreen .page{max-width:min(1000px,96vw)}
+:fullscreen .p{padding:24px 28px 56px}
 </style>
 </head>
 <body>
@@ -57,23 +65,30 @@ h1,h2,h3{font-weight:700;color:#000}
 
 <!-- p01: 표지 -->
 <div class="page active" id="p01">
-  <div class="p">
-    <div style="text-align:center;border-bottom:4px solid #000;padding-bottom:14px;margin-bottom:16px">
-      <div style="font-size:10px;letter-spacing:2px;color:#888;text-transform:uppercase;margin-bottom:4px">Sungkyunkwan University</div>
-      <h1 style="font-size:1.6rem;letter-spacing:1px;margin-bottom:3px">성균관대학교</h1>
-      <h1 style="font-size:1.2rem;letter-spacing:.5px">첨단디스플레이공학과</h1>
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;padding-top:8px;border-top:1px solid #ddd;font-size:11px;color:#555">
-        <span style="background:#000;color:#fff;padding:3px 8px;border-radius:2px;font-size:10px;letter-spacing:1px">창간호</span>
-        <span>계간지</span><span>April 2026</span>
+  <div style="height:100%;display:flex;flex-direction:column;justify-content:space-between;padding:40px 32px;background:linear-gradient(135deg, #000 0%, #1a1a1a 100%);">
+    <div style="text-align:center">
+      <div style="font-size:11px;letter-spacing:3px;color:#ffd700;text-transform:uppercase;margin-bottom:12px;font-weight:700">Sungkyunkwan University</div>
+      <div style="height:3px;width:60px;background:#ffd700;margin:0 auto 20px"></div>
+      <h1 style="font-size:1.8rem;letter-spacing:1px;margin-bottom:8px;color:#fff;font-weight:700">성균관대학교</h1>
+      <h1 style="font-size:1.4rem;letter-spacing:.5px;color:#ffd700;font-weight:700">첨단디스플레이공학과</h1>
+    </div>
+    
+    <div style="text-align:center;padding:20px 0">
+      <img src="디스플레이표지.png" alt="표지 이미지" style="width:100%;max-width:280px;aspect-ratio:16/9;object-fit:cover;border-radius:8px;display:inline-block;box-shadow:0 4px 20px rgba(255,215,0,0.2);border:2px solid #ffd700">
+    </div>
+    
+    <div style="text-align:center">
+      <div style="font-size:10px;letter-spacing:2px;color:#ffd700;text-transform:uppercase;margin-bottom:8px;font-weight:700">Cover Story</div>
+      <div style="font-size:1.2rem;font-weight:700;line-height:1.5;word-break:keep-all;color:#fff">인공지능과 디스플레이가<br>만나는 일상</div>
+      <div style="height:2px;width:100%;background:linear-gradient(90deg, transparent 0%, #ffd700 50%, transparent 100%);margin-top:20px;margin-bottom:12px"></div>
+      <div style="display:flex;justify-content:center;align-items:center;gap:16px;flex-wrap:wrap">
+        <span style="background:#ffd700;color:#000;padding:4px 10px;border-radius:3px;font-size:11px;letter-spacing:1px;font-weight:700">창간호</span>
+        <span style="color:#ccc;font-size:12px">계간지</span>
+        <span style="color:#ccc;font-size:12px">April 2026</span>
       </div>
     </div>
-    <img src="디스플레이표지.png" alt="표지 이미지" class="img-cover" style="margin-bottom:16px;filter:grayscale(15%) contrast(108%)">
-    <div style="text-align:center">
-      <span class="label" style="display:block;text-align:center">Cover Story</span>
-      <div style="font-size:1.1rem;font-weight:700;line-height:1.4;word-break:keep-all">인공지능과 디스플레이가 만나는 일상</div>
-    </div>
   </div>
-  <span class="pg">01</span>
+  <span class="pg" style="color:#ffd700;font-weight:600">01</span>
 </div>
 
 <!-- p02: 커버스토리 -->
