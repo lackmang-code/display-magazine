@@ -16,7 +16,7 @@ h1,h2,h3{font-weight:700;color:#000}
 .db{height:4px;background:#000;margin-bottom:10px}
 .dt{height:1px;background:#e0e0e0;margin:12px 0}
 .label{font-size:11px;font-weight:700;color:#d93025;letter-spacing:2px;text-transform:uppercase;display:block;margin-bottom:10px}
-.body-txt{font-size:14.5px;line-height:1.85;color:#333;word-break:keep-all}
+.body-txt{font-size:14.5px;line-height:1.85;color:#333;word-break:keep-all;text-align:justify}
 .body-txt p{margin-bottom:12px}
 .body-txt p:last-child{margin-bottom:0}
 .note{padding-left:12px;border-left:3px solid #000}
@@ -61,15 +61,15 @@ h1,h2,h3{font-weight:700;color:#000}
 
   /* 책 */
   .book-wrap{width:100%;max-width:1100px;align-self:center;flex:1;display:flex;align-items:center;padding:0 10px 10px}
-  .spread{display:flex;align-items:stretch;width:100%;height:100%;filter:drop-shadow(0 8px 32px rgba(0,0,0,.35))}
-  .page-left{flex:1;background:#fdf9f3;overflow:hidden;position:relative;border-radius:4px 0 0 4px}
-  .page-right{flex:1;background:#fdf9f3;overflow:hidden;position:relative;border-radius:0 4px 4px 0}
-  .page-placeholder{flex:1;background:#b8af9f;border-radius:4px 0 0 4px}
-  .page-placeholder-r{flex:1;background:#b8af9f;border-radius:0 4px 4px 0}
+  .spread{display:flex;align-items:stretch;width:100%;height:770px;filter:drop-shadow(0 12px 40px rgba(0,0,0,.45)) drop-shadow(0 4px 12px rgba(0,0,0,.25))}
+  .page-left{flex:1;background:#fdf9f3;overflow:hidden;position:relative;border-radius:4px 0 0 4px;box-shadow:inset -10px 0 20px rgba(0,0,0,.08), 2px 0 6px rgba(0,0,0,.12)}
+  .page-right{flex:1;background:#fdf9f3;overflow:hidden;position:relative;border-radius:0 4px 4px 0;box-shadow:inset 10px 0 20px rgba(0,0,0,.08), -2px 0 6px rgba(0,0,0,.12)}
+  .page-placeholder{flex:1;background:#b8af9f;border-radius:4px 0 0 4px;box-shadow:inset -8px 0 16px rgba(0,0,0,.06)}
+  .page-placeholder-r{flex:1;background:#b8af9f;border-radius:0 4px 4px 0;box-shadow:inset 8px 0 16px rgba(0,0,0,.06)}
   .cover-front{flex:1;border-radius:0 4px 4px 0;background:linear-gradient(135deg,#000 0%,#1a1a1a 100%);display:flex;flex-direction:column;justify-content:space-between;padding:36px 28px;position:relative}
   .cover-back{flex:1;border-radius:4px 0 0 4px;background:linear-gradient(135deg,#000 0%,#1a1a1a 100%);display:flex;flex-direction:column;justify-content:space-between;padding:36px 28px;position:relative}
   .spine{width:0;flex-shrink:0}
-  .bp{padding:24px 20px 44px;height:100%;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .bp{padding:24px 20px 44px;height:770px;overflow-y:auto;-webkit-overflow-scrolling:touch}
   .bpg{position:absolute;bottom:10px;font-size:11px;color:#bbb}
   .bpg-l{left:14px}.bpg-r{right:14px}
   .b-sec-title{font-size:1.5rem;line-height:1.3;margin-bottom:10px}
@@ -103,9 +103,11 @@ h1,h2,h3{font-weight:700;color:#000}
   .phone-dot.active{background:#111;transform:scale(1.2)}
   .p-sec-title{font-size:1.4rem;line-height:1.3;margin-bottom:8px}
   .p-portrait{width:80px}
-  .body{font-size:15px;line-height:1.8;color:#333;word-break:keep-all}
+  .body{font-size:15px;line-height:1.85;color:#333;word-break:keep-all;text-align:justify}
   .body p{margin-bottom:12px}
   .body p:last-child{margin-bottom:0}
+  .note h3{font-size:1.05rem;margin-bottom:6px;color:#333}
+  .note p{font-size:14.5px;font-style:italic;color:#555;line-height:1.75}
 
   /* 책 UI 숨김 */
   .book-nav,.book-wrap{display:none!important}
@@ -256,12 +258,12 @@ function patentCardsHTML(){
   patents.forEach(p=>{
     const sc=p.status==='등록'?{bg:'#e6f4ea',c:'#1a7a3a'}:{bg:'#fef3f0',c:'#d93025'};
     h+=`<div class="pat-card">
-      <div><span class="pat-badge" style="background:#f0f4ff;color:#2a5db0;border:1px solid #c5d7f7">${p.country}</span><span class="pat-badge" style="background:${sc.bg};color:${sc.c}">${p.status}</span></div>
-      <div style="font-size:11px;font-weight:700;color:#111;line-height:1.5;margin-bottom:7px;word-break:keep-all">${p.title}</div>
-      <div style="font-size:9px;color:#666;display:flex;flex-direction:column;gap:3px">
-        <div><span style="color:#aaa;min-width:32px;display:inline-block">출원인</span>${p.applicant}</div>
-        <div><span style="color:#aaa;min-width:32px;display:inline-block">출원일</span>${p.applicationDate}</div>
-        ${p.registrationDate?`<div><span style="color:#aaa;min-width:32px;display:inline-block">등록일</span>${p.registrationDate}</div>`:''}
+      <div><span class="pat-badge" style="background:#f0f4ff;color:#2a5db0;border:1px solid #c5d7f7;font-size:12px">${p.country}</span><span class="pat-badge" style="background:${sc.bg};color:${sc.c};font-size:12px">${p.status}</span></div>
+      <div style="font-size:14px;font-weight:700;color:#111;line-height:1.6;margin-bottom:10px;word-break:keep-all">${p.title}</div>
+      <div style="font-size:13px;color:#666;display:flex;flex-direction:column;gap:5px">
+        <div><span style="color:#aaa;min-width:42px;display:inline-block">출원인</span>${p.applicant}</div>
+        <div><span style="color:#aaa;min-width:42px;display:inline-block">출원일</span>${p.applicationDate}</div>
+        ${p.registrationDate?`<div><span style="color:#aaa;min-width:42px;display:inline-block">등록일</span>${p.registrationDate}</div>`:''}
       </div>
     </div>`;
   });
@@ -356,9 +358,9 @@ function bP04(){return `<div class="bp">
   <div style="display:flex;gap:14px;align-items:flex-start;margin-bottom:14px">
     <img src="학과장.jpg" alt="학과장" class="img-portrait b-portrait" onerror="this.style.display='none'">
     <div class="note" style="flex:1">
-      <h3>학과장 인사말</h3>
+      <h2 style="font-size:1.5rem;margin-bottom:6px;color:#333;font-weight:700">학과장 인사말</h2>
       <div class="dt" style="margin:7px 0"></div>
-      <p>첨단디스플레이공학과 계간지의 창간을 매우 뜻깊게 생각하며, 이를 위해 힘써주신 모든 구성원 여러분께 깊이 감사드립니다.</p>
+      <p style="font-size:14.5px;font-style:italic;color:#555;line-height:1.75">첨단디스플레이공학과 계간지의 창간을 매우 뜻깊게 생각하며, 이를 위해 힘써주신 모든 구성원 여러분께 깊이 감사드립니다.</p>
     </div>
   </div>
   <div class="dt"></div>
@@ -377,9 +379,9 @@ function bP05(){return `<div class="bp">
   <div style="display:flex;gap:14px;align-items:flex-start;margin-bottom:14px">
     <img src="학장.jpg" alt="학장" class="img-portrait b-portrait" onerror="this.style.display='none'">
     <div class="note" style="flex:1">
-      <h3>정보통신대학장 축사</h3>
+      <h2 style="font-size:1.5rem;margin-bottom:6px;color:#333;font-weight:700">정보통신대학장 축사</h2>
       <div class="dt" style="margin:7px 0"></div>
-      <p>첨단디스플레이공학과 계간지의 창간을 진심으로 축하드립니다.</p>
+      <p style="font-size:14.5px;font-style:italic;color:#555;line-height:1.75">첨단디스플레이공학과 계간지의 창간을 진심으로 축하드립니다.</p>
     </div>
   </div>
   <div class="dt"></div>
