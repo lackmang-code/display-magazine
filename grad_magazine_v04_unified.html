@@ -233,8 +233,11 @@ function buildAccHTML(grouped,isConf){
     const items=grouped[key];
     const id='ac'+Math.random().toString(36).slice(2,8);
     html+=`<div><div class="acc-hdr" onclick="toggleAcc('${id}')">
-      <span>${key} <span style="font-size:12px;color:#aaa;font-weight:400">${items.length}건</span></span>
-      <span id="arr_${id}" style="font-size:10px;color:#aaa;transition:transform .2s">▼</span>
+      <span>${key}</span>
+      <span style="display:flex;align-items:center;gap:8px">
+        <span style="font-size:14px;font-weight:700;color:#111">${items.length}건</span>
+        <span id="arr_${id}" style="font-size:10px;color:#aaa;transition:transform .2s">▼</span>
+      </span>
     </div><div class="acc-body" id="${id}">`;
     items.forEach(item=>{
       const meta=isConf?`발표자: ${item.presenter} · ${item.conf} · ${item.date}`:`${item.journal} · ${item.issue} · ${item.date}`;
@@ -254,9 +257,9 @@ function buildAccHTML(grouped,isConf){
 function patentCardsHTML(){
   let h='';
   patents.forEach(p=>{
-    const sc=p.status==='등록'?{bg:'#e6f4ea',c:'#1a7a3a'}:{bg:'#fef3f0',c:'#d93025'};
+    const sc=p.status==='등록'?{bg:'#e6f4ea',c:'#111'}:{bg:'#f0f4ff',c:'#111'};
     h+=`<div class="pat-card">
-      <div><span class="pat-badge" style="background:#f0f4ff;color:#2a5db0;border:1px solid #c5d7f7;font-size:12px">${p.country}</span><span class="pat-badge" style="background:${sc.bg};color:${sc.c};font-size:12px">${p.status}</span></div>
+      <div><span class="pat-badge" style="background:#f0f0f0;color:#111;border:1px solid #ccc;font-size:12px">${p.country}</span><span class="pat-badge" style="background:${sc.bg};color:${sc.c};font-size:12px;border:1px solid ${p.status==='등록'?'#a8d8b8':'#c5d7f7'}">${p.status}</span></div>
       <div style="font-size:14px;font-weight:700;color:#111;line-height:1.6;margin-bottom:10px;word-break:keep-all">${p.title}</div>
       <div style="font-size:13px;color:#666;display:flex;flex-direction:column;gap:5px">
         <div><span style="color:#aaa;min-width:42px;display:inline-block">출원인</span>${p.applicant}</div>
@@ -398,8 +401,8 @@ function bP06(){
     <div class="db"></div><span class="label">2026년 1분기</span>
     <h2 style="font-size:1.4rem;margin-bottom:10px">논문 실적 <span style="font-size:1rem;color:#aaa;font-weight:400">(총 <strong style="color:#d93025">26</strong>건)</span></h2>
     <div class="sum-cards">
-      <div class="sum-card" style="background:#fef3f0;border:1px solid #fdd9ce"><div class="sum-num" style="color:#d93025">26</div><div class="sum-lbl" style="color:#aaa">전체 논문</div></div>
-      <div class="sum-card" style="background:#e8f0fb;border:1px solid #b3ccf0"><div class="sum-num" style="color:#1a56a0">26</div><div class="sum-lbl" style="color:#1a56a0">SCIE</div></div>
+      <div class="sum-card" style="background:#fef3f0;border:1px solid #fdd9ce"><div class="sum-num" style="color:#111">26</div><div class="sum-lbl" style="color:#aaa">전체 논문</div></div>
+      <div class="sum-card" style="background:#e8f0fb;border:1px solid #b3ccf0"><div class="sum-num" style="color:#111">26</div><div class="sum-lbl" style="color:#1a56a0">SCIE</div></div>
       <div class="sum-card" style="background:#f7f5f1;border:1px solid #e8e4de"><div class="sum-num" style="color:#333">${Object.keys(g).length}</div><div class="sum-lbl" style="color:#aaa">참여 교수</div></div>
     </div>
     ${buildAccHTML(g,false)}
@@ -412,8 +415,8 @@ function bP07(){
     <div class="db"></div><span class="label">2026년 1분기</span>
     <h2 style="font-size:1.4rem;margin-bottom:10px">학술대회 실적 <span style="font-size:1rem;color:#aaa;font-weight:400">(총 <strong style="color:#d93025">40</strong>건)</span></h2>
     <div class="sum-cards">
-      <div class="sum-card" style="background:#fef3f0;border:1px solid #fdd9ce"><div class="sum-num" style="color:#d93025">${confs.length}</div><div class="sum-lbl" style="color:#aaa">전체 발표</div></div>
-      <div class="sum-card" style="background:#e6f4ea;border:1px solid #a8d8b8"><div class="sum-num" style="color:#1a7a3a">${new Set(confs.map(c=>c.conf)).size}</div><div class="sum-lbl" style="color:#1a7a3a">학술대회</div></div>
+      <div class="sum-card" style="background:#fef3f0;border:1px solid #fdd9ce"><div class="sum-num" style="color:#111">${confs.length}</div><div class="sum-lbl" style="color:#aaa">전체 발표</div></div>
+      <div class="sum-card" style="background:#e6f4ea;border:1px solid #a8d8b8"><div class="sum-num" style="color:#111">${new Set(confs.map(c=>c.conf)).size}</div><div class="sum-lbl" style="color:#aaa">학술대회</div></div>
       <div class="sum-card" style="background:#f7f5f1;border:1px solid #e8e4de"><div class="sum-num" style="color:#333">${new Set(confs.map(c=>c.prof)).size}</div><div class="sum-lbl" style="color:#aaa">참여 교수</div></div>
     </div>
     ${buildAccHTML(g,true)}
@@ -424,9 +427,9 @@ function bP08(){return `<div class="bp">
   <div class="db"></div><span class="label">2026년 1분기</span>
   <h2 style="font-size:1.4rem;margin-bottom:10px">특허 실적 <span style="font-size:1rem;color:#aaa;font-weight:400">(총 <strong style="color:#d93025">3</strong>건)</span></h2>
   <div class="sum-cards">
-    <div class="sum-card" style="background:#fef3f0;border:1px solid #fdd9ce"><div class="sum-num" style="color:#d93025">3</div><div class="sum-lbl" style="color:#aaa">전체</div></div>
-    <div class="sum-card" style="background:#f0f4ff;border:1px solid #c5d7f7"><div class="sum-num" style="color:#2a5db0">3</div><div class="sum-lbl" style="color:#2a5db0">국내</div></div>
-    <div class="sum-card" style="background:#e6f4ea;border:1px solid #a8d8b8"><div class="sum-num" style="color:#1a7a3a">1</div><div class="sum-lbl" style="color:#1a7a3a">등록</div></div>
+    <div class="sum-card" style="background:#fef3f0;border:1px solid #fdd9ce"><div class="sum-num" style="color:#111">3</div><div class="sum-lbl" style="color:#aaa">전체</div></div>
+    <div class="sum-card" style="background:#f0f4ff;border:1px solid #c5d7f7"><div class="sum-num" style="color:#111">2</div><div class="sum-lbl" style="color:#aaa">출원</div></div>
+    <div class="sum-card" style="background:#e6f4ea;border:1px solid #a8d8b8"><div class="sum-num" style="color:#111">1</div><div class="sum-lbl" style="color:#aaa">등록</div></div>
   </div>
   ${patentCardsHTML()}
   <div class="bpg bpg-l">08</div>
@@ -565,8 +568,8 @@ function buildPhonePages(){
       <div class="db"></div>
       <h2 style="font-size:1.2rem;margin-bottom:12px">논문 실적 <span style="font-size:0.8rem;color:#aaa;font-weight:400">(2026년 1분기)</span></h2>
       <div class="sum-cards">
-        <div class="sum-card" style="background:#fef3f0;border:1px solid #fdd9ce"><div class="sum-num" style="color:#d93025">26</div><div class="sum-lbl" style="color:#aaa">전체 논문</div></div>
-        <div class="sum-card" style="background:#e8f0fb;border:1px solid #b3ccf0"><div class="sum-num" style="color:#1a56a0">26</div><div class="sum-lbl" style="color:#1a56a0">SCIE 논문</div></div>
+        <div class="sum-card" style="background:#fef3f0;border:1px solid #fdd9ce"><div class="sum-num" style="color:#111">26</div><div class="sum-lbl" style="color:#aaa">전체 논문</div></div>
+        <div class="sum-card" style="background:#e8f0fb;border:1px solid #b3ccf0"><div class="sum-num" style="color:#111">26</div><div class="sum-lbl" style="color:#aaa">SCIE 논문</div></div>
         <div class="sum-card" style="background:#f7f5f1;border:1px solid #e8e4de"><div class="sum-num" style="color:#333">${Object.keys(g6).length}</div><div class="sum-lbl" style="color:#aaa">참여 교수</div></div>
       </div>
       ${buildAccHTML(g6,false)}
@@ -575,8 +578,8 @@ function buildPhonePages(){
       <div class="db"></div>
       <h2 style="font-size:1.2rem;margin-bottom:12px">학술대회 실적 <span style="font-size:0.8rem;color:#aaa;font-weight:400">(2026년 1분기)</span></h2>
       <div class="sum-cards">
-        <div class="sum-card" style="background:#fef3f0;border:1px solid #fdd9ce"><div class="sum-num" style="color:#d93025">${confs.length}</div><div class="sum-lbl" style="color:#aaa">전체 발표</div></div>
-        <div class="sum-card" style="background:#e6f4ea;border:1px solid #a8d8b8"><div class="sum-num" style="color:#1a7a3a">${new Set(confs.map(c=>c.conf)).size}</div><div class="sum-lbl" style="color:#1a7a3a">학술대회 수</div></div>
+        <div class="sum-card" style="background:#fef3f0;border:1px solid #fdd9ce"><div class="sum-num" style="color:#111">${confs.length}</div><div class="sum-lbl" style="color:#aaa">전체 발표</div></div>
+        <div class="sum-card" style="background:#e6f4ea;border:1px solid #a8d8b8"><div class="sum-num" style="color:#111">${new Set(confs.map(c=>c.conf)).size}</div><div class="sum-lbl" style="color:#aaa">학술대회 수</div></div>
         <div class="sum-card" style="background:#f7f5f1;border:1px solid #e8e4de"><div class="sum-num" style="color:#333">${new Set(confs.map(c=>c.prof)).size}</div><div class="sum-lbl" style="color:#aaa">참여 교수</div></div>
       </div>
       ${buildAccHTML(g7,true)}
@@ -585,9 +588,9 @@ function buildPhonePages(){
       <div class="db"></div>
       <h2 style="font-size:1.2rem;margin-bottom:12px">특허 실적 <span style="font-size:0.8rem;color:#aaa;font-weight:400">(2026년 1분기)</span></h2>
       <div class="sum-cards">
-        <div class="sum-card" style="background:#fef3f0;border:1px solid #fdd9ce"><div class="sum-num" style="color:#d93025">3</div><div class="sum-lbl" style="color:#aaa">전체 특허</div></div>
-        <div class="sum-card" style="background:#f0f4ff;border:1px solid #c5d7f7"><div class="sum-num" style="color:#2a5db0">3</div><div class="sum-lbl" style="color:#2a5db0">국내 특허</div></div>
-        <div class="sum-card" style="background:#e6f4ea;border:1px solid #a8d8b8"><div class="sum-num" style="color:#1a7a3a">1</div><div class="sum-lbl" style="color:#1a7a3a">등록 완료</div></div>
+        <div class="sum-card" style="background:#fef3f0;border:1px solid #fdd9ce"><div class="sum-num" style="color:#111">3</div><div class="sum-lbl" style="color:#aaa">전체 특허</div></div>
+        <div class="sum-card" style="background:#f0f4ff;border:1px solid #c5d7f7"><div class="sum-num" style="color:#111">2</div><div class="sum-lbl" style="color:#aaa">출원</div></div>
+        <div class="sum-card" style="background:#e6f4ea;border:1px solid #a8d8b8"><div class="sum-num" style="color:#111">1</div><div class="sum-lbl" style="color:#aaa">등록</div></div>
       </div>
       ${patentCardsHTML()}
     </div>`,
