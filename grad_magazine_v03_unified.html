@@ -104,7 +104,7 @@ h1,h2,h3{font-weight:700;color:#000}
 
 <nav class="phone-nav">
   <button id="p-btn-prev" onclick="phoneGo(-1)" disabled>← 이전</button>
-  <span class="pinfo" id="pinfo">표지<br>p.01</span>
+  <span id="pinfo"></span>
   <div style="display:flex;gap:6px">
     <button onclick="toggleFS()" id="p-btn-fs">전체화면</button>
     <button id="p-btn-next" onclick="phoneGo(1)">다음 →</button>
@@ -640,7 +640,7 @@ function phoneJump(i){
   const el=document.getElementById(phonePages[phoneCur].id);
   el.classList.add('active');el.scrollTop=0;
   document.querySelectorAll('.phone-dot')[phoneCur].classList.add('active');
-  document.getElementById('pinfo').textContent=phonePages[phoneCur].label;
+  document.getElementById('pinfo').textContent='';
   document.getElementById('p-btn-prev').disabled=phoneCur===0;
   document.getElementById('p-btn-next').disabled=phoneCur===phonePages.length-1;
   bookSyncFromPhone(i);
@@ -652,7 +652,7 @@ const spreadToPhone=[0,1,3,5,7,8];
 function bookSyncFromPhone(pi){bookCur=phoneToSpread[pi];}
 function phoneSyncFromBook(si){
   const pi=spreadToPhone[si];phoneCur=pi;
-  document.getElementById('pinfo').textContent=phonePages[pi].label;
+  document.getElementById('pinfo').textContent='';
   document.getElementById('p-btn-prev').disabled=pi===0;
   document.getElementById('p-btn-next').disabled=pi===phonePages.length-1;
 }
