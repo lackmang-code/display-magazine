@@ -1,0 +1,6 @@
+# 인쇄용 파일 — 로컬 보관, 배포 제외
+**/print.html
+**/print_booklet.html
+**/print_single.html
+**/assets_print/
+**/*인쇄용*.pdf
