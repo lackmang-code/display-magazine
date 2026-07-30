@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta name="robots" content="noindex,nofollow">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
 <title>성균관대학교 첨단디스플레이공학과 월간 Letter 2호</title>
@@ -993,13 +992,20 @@ function buildPhonePages(){
     pagesHTML.splice(pagesHTML.length-1, 0, ...PHOTOS.map(ph=>phoneFullPhoto(ph)));
   }
 
+  // 웹용 webp 우선 로드 — HTML 문자열 단계에서 src를 webp로 바꾸고 원본은 data-fallback에 보존
+  // (원본+webp 이중 요청 방지, webp 없으면 error 이벤트로 원본 폴백)
   phonePages.forEach((pg,i)=>{
     const div=document.createElement('div');
     div.className='phone-page'+(i===0?' active':'');
     div.id=pg.id;
-    div.innerHTML=pagesHTML[i];
+    div.innerHTML=pagesHTML[i].replace(/(<img[^>]*\ssrc=")([^"]+?)\.(png|jpe?g)(")/gi,
+      (m,pre,path,ext,post)=>`${pre}${path}.webp${post} data-fallback="${path}.${ext}"`);
     wrap.appendChild(div);
   });
+  wrap.addEventListener('error', e=>{
+    const t=e.target;
+    if(t.tagName==='IMG' && t.dataset.fallback && t.src.indexOf('.webp')>-1){ t.src=t.dataset.fallback; }
+  }, true);
   tintColumns(wrap);
 }
 
