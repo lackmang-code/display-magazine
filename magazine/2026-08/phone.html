@@ -372,7 +372,6 @@ if (hasMultiCS) {
   const profIntros = INTROS.filter(i => i.id !== 'head' && i.id !== 'dean');
   profIntros.forEach((intro, i) => flatPages.push('prof' + (i + 1)));
 }
-flatPages.push('status');
 flatPages.push('p06','p07','p08');
 if (GRADUATES.length) flatPages.push('gradindex');
 flatPages.push('events','admission');
