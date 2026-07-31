@@ -1422,6 +1422,13 @@ function tintColumns(root){
 
 let cur=0;
 const spreadEl=document.getElementById('spread');
+// webp 로드 실패 시 원본으로 자동 폴백 (1회만 등록 — capture 단계라 버블링 안 되는 error 이벤트도 잡힘)
+spreadEl.addEventListener('error', e=>{
+  const t=e.target;
+  if(t.tagName==='IMG' && t.dataset.fallback && t.src.indexOf('.webp')>-1){
+    t.src=t.dataset.fallback;
+  }
+}, true);
 const dotsEl=document.getElementById('book-dots');
 spreads.forEach((_,i)=>{
   const d=document.createElement('button');
@@ -1439,6 +1446,10 @@ function renderSpread(i){
   if(s.left===null) html=`<div class="page-placeholder"></div><div class="spine"></div>${safeBuild(s.right,1)}`;
   else if(s.right===null) html=`${safeBuild(s.left,2 * i)}<div class="spine"></div><div class="page-placeholder-r"></div>`;
   else html=`<div class="page-left">${safeBuild(s.left,2 * i)}</div><div class="spine"></div><div class="page-right">${safeBuild(s.right,2 * i + 1)}</div>`;
+  // 웹용 webp 우선 로드 — HTML 문자열 단계에서 src를 webp로 바꾸고, 원본 경로는 data-fallback에 보존해
+  // 브라우저가 처음부터 webp 하나만 요청하게 함(원본+webp 이중 요청 방지). webp 없으면 error 이벤트로 원본 폴백.
+  html = html.replace(/(<img[^>]*\ssrc=")([^"]+?)\.(png|jpe?g)(")/gi,
+    (m, pre, path, ext, post) => `${pre}${path}.webp${post} data-fallback="${path}.${ext}"`);
   spreadEl.innerHTML=html;
   tintColumns(spreadEl);
   spreadEl.querySelectorAll('.reveal').forEach(e=>requestAnimationFrame(()=>requestAnimationFrame(()=>e.classList.add('in'))));
