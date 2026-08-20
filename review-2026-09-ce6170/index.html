@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta name="robots" content="noindex,nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>첨디공 ON 9월호(3호) 발행 전 검수</title>
+<meta name="description" content="9월호 검수용 링크와 검수 체크리스트. 발행 예정일 9월 1일">
+<style>
+  :root{
+    --ink:#1a1a1a; --sub:#5f5a52; --line:#e0dbd2;
+    --cream:#fdf9f3; --bg:#c8bfb0; --gold:#ffd700; --red:#d93025; --black:#000;
+    --done:#1f7a3d;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);
+       font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;
+       line-height:1.8;-webkit-text-size-adjust:100%}
+  .sheet{max-width:720px;margin:0 auto;background:var(--cream);min-height:100vh;
+         box-shadow:0 0 40px rgba(0,0,0,.18)}
+
+  .top{background:linear-gradient(160deg,#000 0%,#1a1a1a 100%);color:#fff;padding:34px 28px 28px}
+  .brand{font-size:12px;letter-spacing:.34em;color:var(--gold);font-weight:700}
+  .top h1{font-size:25px;line-height:1.45;margin:14px 0 0;font-weight:800;letter-spacing:-.02em}
+  .top .issue{margin-top:12px;font-size:13.5px;color:#cfc9bd}
+  .rule{height:4px;background:var(--gold)}
+
+  .sched{display:flex;border-bottom:1px solid var(--line);background:#fff}
+  .sched div{flex:1;text-align:center;padding:14px 6px;font-size:12.5px;color:var(--sub);
+             border-right:1px solid var(--line)}
+  .sched div:last-child{border-right:0}
+  .sched b{display:block;font-size:15px;color:var(--ink);margin-bottom:3px}
+  .sched .now{background:#fff6f5}
+  .sched .now b{color:var(--red)}
+  .sched .past{color:#a89e8e}
+  .sched .past b{color:#a89e8e;font-weight:600}
+
+  .pad{padding:30px 28px 40px}
+  p{margin:0 0 16px;font-size:15.5px}
+  .lead{font-size:16px}
+
+  h2.sec{font-size:13px;letter-spacing:.16em;color:var(--red);font-weight:800;
+         margin:36px 0 14px;padding-bottom:9px;border-bottom:2px solid var(--ink)}
+
+  /* 열람 버튼 */
+  .opens{display:flex;gap:12px;flex-wrap:wrap}
+  .open{flex:1 1 200px;display:block;background:var(--ink);color:var(--gold);text-decoration:none;
+        padding:18px 20px;border-radius:8px;text-align:center;font-size:16px;font-weight:800}
+  .open span{display:block;font-size:11.5px;color:#b5ac9a;font-weight:500;margin-top:5px}
+  .open.alt{background:#fff;color:var(--ink);border:1.5px solid var(--ink)}
+  .open.alt span{color:var(--sub)}
+  .open.soon{opacity:.4;border-style:dashed;cursor:default}
+  .pdfnote{margin:12px 2px 0;font-size:13.5px;color:var(--sub)}
+
+  /* 이번 호 달라진 점 */
+  .diff{background:#fff;border:1px solid var(--line);border-left:3px solid var(--gold);
+        border-radius:0 8px 8px 0;padding:16px 20px}
+  .diff dl{margin:0}
+  .diff dt{font-weight:800;font-size:14.5px;margin-top:12px}
+  .diff dt:first-child{margin-top:0}
+  .diff dd{margin:2px 0 0;font-size:14.5px;color:var(--sub)}
+
+  /* 확인 항목 */
+  .item{border-bottom:1px solid var(--line);padding:20px 0}
+  .item:last-of-type{border-bottom:0}
+  .item h3{font-size:17px;margin:0 0 11px;font-weight:800;display:flex;gap:11px;align-items:baseline}
+  .num{flex:0 0 auto;width:25px;height:25px;border-radius:50%;background:var(--ink);color:var(--gold);
+       font-size:12.5px;line-height:25px;text-align:center;font-weight:800}
+  .cur{background:#fff;border:1px solid var(--line);border-left:3px solid var(--gold);
+       border-radius:0 6px 6px 0;padding:12px 15px;margin:0 0 12px;font-size:14.5px;color:var(--sub)}
+  .cur .tag{display:block;font-size:11px;letter-spacing:.1em;color:#a09585;font-weight:700;margin-bottom:5px}
+  .cur .val{color:var(--ink)}
+  .ask{font-size:15px;margin:0}
+
+  /* 체크리스트 */
+  .prog{display:flex;align-items:center;gap:12px;margin:0 0 14px;font-size:13px;color:var(--sub)}
+  .bar{flex:1;height:7px;background:#e6e0d5;border-radius:99px;overflow:hidden}
+  .bar i{display:block;height:100%;width:0;background:var(--done);transition:width .25s}
+  #cnt{font-weight:800;color:var(--ink);font-variant-numeric:tabular-nums}
+  ul.ck{list-style:none;margin:0;padding:0;background:#fff;border:1px solid var(--line);border-radius:8px}
+  ul.ck li{border-bottom:1px solid var(--line)}
+  ul.ck li:last-child{border-bottom:0}
+  ul.ck label{display:flex;gap:13px;align-items:flex-start;padding:14px 18px;cursor:pointer}
+  ul.ck input{appearance:none;-webkit-appearance:none;flex:0 0 auto;width:21px;height:21px;margin:4px 0 0;
+              border:2px solid #bbb2a3;border-radius:5px;background:#fff;cursor:pointer;position:relative}
+  ul.ck input:checked{background:var(--done);border-color:var(--done)}
+  ul.ck input:checked::after{content:"";position:absolute;left:6px;top:2px;width:5px;height:10px;
+              border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg)}
+  ul.ck .t{font-size:15.5px;font-weight:700;line-height:1.5}
+  ul.ck .d{display:block;font-size:13.5px;color:var(--sub);font-weight:400;margin-top:2px}
+  ul.ck input:checked ~ .t{color:#9a9287;text-decoration:line-through;text-decoration-color:#cfc6b8}
+  .ckfoot{font-size:13px;color:var(--sub);margin:10px 2px 0}
+
+  .reply{background:var(--black);color:#fff;border-radius:8px;padding:24px 26px;margin:34px 0 0}
+  .reply h3{margin:0 0 10px;font-size:16.5px;color:var(--gold);font-weight:800}
+  .reply p{color:#e6e1d8;font-size:14.5px;margin:0 0 10px}
+  .reply p:last-child{margin:0}
+  .reply .due{color:var(--gold);font-weight:700}
+
+  .foot{border-top:1px solid var(--line);padding:26px 28px 34px;text-align:center}
+  .foot svg{width:150px;height:auto;opacity:.9}
+  .foot .who{margin-top:10px;font-size:12.5px;color:var(--sub)}
+
+  @media (max-width:520px){
+    .top{padding:28px 20px 24px}
+    .top h1{font-size:21px}
+    .pad{padding:24px 20px 34px}
+    .sched div{padding:10px 3px;font-size:10.5px;line-height:1.35}
+    .sched b{font-size:12px}
+    p{font-size:15px}
+    ul.ck label{padding:13px 15px}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="top">
+    <div class="brand">첨디공 ON</div>
+    <h1>9월호(3호)<br>발행 전 검수</h1>
+    <div class="issue">성균관대학교 첨단디스플레이공학과 월간 Letter · 2026년 9월호</div>
+  </div>
+  <div class="rule"></div>
+
+  <div class="sched">
+    <div class="past"><b>8/10</b>자료 요청</div>
+    <div class="past"><b>8/20</b>확인 요청</div>
+    <div class="now"><b>8/24 (월)</b>발행 전 리뷰</div>
+    <div><b>~8/28 (금)</b>회의 내용 반영</div>
+    <div><b>9/1 (화)</b>발행</div>
+  </div>
+
+  <div class="pad">
+    <p class="lead">이원규 교수님, 안녕하세요.<br>Next I/O 성대첨디공 매거진팀입니다.</p>
+
+    <p>9월호 검수본이 준비되어 회의 전에 미리 보시도록 링크를 보내드립니다.</p>
+    <p>학과 코너(학과행사, 배출인력 소개, 실적)는 <strong>8월호에 실린 내용이 그대로</strong> 들어가 있는 상태입니다. 바꿀 부분은 <strong>8월 24일 회의에서 함께 확인</strong>하고, 회의 후에 반영해 9월 1일 발행하겠습니다.</p>
+
+    <h2 class="sec">검수본 열어보기</h2>
+    <div class="opens">
+      <a class="open" href="book.html" target="_blank" rel="noopener">PC로 보기<span>책 펼침 화면</span></a>
+      <a class="open alt" href="phone.html" target="_blank" rel="noopener">휴대폰으로 보기<span>단면 스크롤 화면</span></a>
+    </div>
+    <p style="margin-top:14px;font-size:14px;color:#5f5a52">
+      휴대폰에서 이 페이지를 보고 계시면 두 링크 모두 열리지만, “PC로 보기”는 화면이 넓은 기기에서 봐주시는 편이 편합니다.
+    </p>
+
+    <h2 class="sec">8월호에서 달라진 점</h2>
+    <div class="diff">
+      <dl>
+        <dt>광각 노트</dt>
+        <dd>연재 세 번째 순서로 언더디스플레이카메라(UDC)를 다룹니다. 화면 아래 카메라가 남기는 흐림·플레어·헤일로 세 가지 흔적이 주제입니다.</dd>
+        <dt>이달의 첨디공 논문</dt>
+        <dd>이보람 교수님의 페로브스카이트 순수 청색 LED 연구를 소개합니다.</dd>
+        <dt>AI가 주목한 Display Tech</dt>
+        <dd>차량용 헤드업 디스플레이(HUD)의 재발견을 네 갈래로 정리했습니다.</dd>
+        <dt>주목할 연구실</dt>
+        <dd>기계공학부 변도영 교수님 연구실(Multiphysics Nano-Fluidics Laboratory)을 소개합니다.</dd>
+        <dt>목차 순서</dt>
+        <dd>이번 호부터 광각 노트를 맨 앞에 두고, 이달의 논문, AI가 주목한 Display Tech 순으로 배치했습니다.</dd>
+        <dt>학과 제공 코너</dt>
+        <dd>학과행사, 배출인력 소개, 논문·학술대회·특허 실적은 8월호 내용이 그대로 들어가 있습니다. 아래 “회의에서 확인할 것” 네 가지를 회의 때 함께 정하겠습니다.</dd>
+      </dl>
+    </div>
+
+    <h2 class="sec">회의에서 확인할 것</h2>
+    <p style="margin-bottom:14px">학과 코너 네 가지입니다. 회의 때 이 순서로 짚어 보시면 됩니다.</p>
+    <div class="item">
+      <h3><span class="num">1</span>연구실 소개</h3>
+      <div class="cur"><span class="tag">현재 실려 있는 내용</span>
+        <span class="val">기계공학부 <strong>변도영 교수님</strong> 연구실(MNFL) · 3페이지</span></div>
+      <p class="ask">이대로 진행해도 될지. 염근영 교수님 자료는 다음 호 이후로 보관 중입니다.</p>
+    </div>
+    <div class="item">
+      <h3><span class="num">2</span>학과행사</h3>
+      <div class="cur"><span class="tag">현재 실려 있는 내용</span>
+        <span class="val">2분기 6건 · 3분기 8건<br>8월 18일 한·중 디스플레이 포럼, 8월 19일 IMID 2026 산학교류회가 아직 <strong>“(예정)”</strong> 표기</span></div>
+      <p class="ask">지난 일정이라 표기를 정리하려 합니다. 내용 변동과 추가할 행사가 있는지 알려주시면 반영하겠습니다.</p>
+    </div>
+    <div class="item">
+      <h3><span class="num">3</span>배출인력 소개</h3>
+      <div class="cur"><span class="tag">현재 실려 있는 내용</span>
+        <span class="val">김태현 · 박설아 · 소인영 · 이현석 · 이승규 · 정하림 · 채수현 <strong>7명</strong>, 전원 “<strong>졸업예정</strong>” 표기</span></div>
+      <p class="ask">8월 졸업이 마무리되는 시점이라 표기를 조정할지, 그리고 추가할 졸업생이 있는지 확인 부탁드립니다.</p>
+    </div>
+    <div class="item">
+      <h3><span class="num">4</span>논문 · 학술대회 · 특허 실적</h3>
+      <div class="cur"><span class="tag">현재 실려 있는 내용</span>
+        <span class="val"><strong>2026년 상반기 기준</strong> · 논문 50건 · 학술대회 57건 · 특허 3건</span></div>
+      <p class="ask">하반기 실적을 추가할지, 상반기 기준을 유지할지 알려주시면 그에 맞춰 진행하겠습니다.</p>
+    </div>
+
+    <h2 class="sec">검수 체크리스트</h2>
+    <div class="prog">
+      <span><b id="cnt">0</b> / 9 확인</span>
+      <span class="bar"><i id="barfill"></i></span>
+    </div>
+    <ul class="ck" id="ck">
+      <li><label><input type="checkbox"><span class="t">표지와 목차<span class="d">제호, 3호 표기, 발행일(9월 1일), 목차 순서와 제목</span></span></label></li>
+      <li><label><input type="checkbox"><span class="t">광각 노트<span class="d">언더디스플레이카메라(UDC) 편</span></span></label></li>
+      <li><label><input type="checkbox"><span class="t">이달의 첨디공 논문<span class="d">이보람 교수님 확인 회신 내용이 제대로 반영되었는지</span></span></label></li>
+      <li><label><input type="checkbox"><span class="t">AI가 주목한 Display Tech<span class="d">HUD 편</span></span></label></li>
+      <li><label><input type="checkbox"><span class="t">주목할 연구실<span class="d">변도영 교수님 연구실 소개, 사진과 연구실 홈페이지 주소</span></span></label></li>
+      <li><label><input type="checkbox"><span class="t">논문 · 학술대회 · 특허 실적<span class="d">기준 기간 표기와 건수, 교수님 성함</span></span></label></li>
+      <li><label><input type="checkbox"><span class="t">배출인력 소개<span class="d">대상 학생, 졸업 여부 표기, 지도교수와 연구실 주소</span></span></label></li>
+      <li><label><input type="checkbox"><span class="t">학과 주요 행사<span class="d">행사명, 날짜, 장소, 지난 일정의 예정 표기 정리 여부</span></span></label></li>
+      <li><label><input type="checkbox"><span class="t">모집요강과 뒤표지<span class="d">연락처, 주소, 판권 정보</span></span></label></li>
+      </ul>
+    <p class="ckfoot">체크 상태는 이 기기에만 저장되며, 저희 쪽으로는 전송되지 않습니다. 회의 중 표시해 두는 용도로 쓰시면 됩니다.</p>
+
+    <h2 class="sec">인쇄용 파일</h2>
+    <div class="opens">
+      <span class="open alt soon">단면 인쇄용 PDF<span>한 장에 한 면</span></span>
+      <span class="open alt soon">책자 인쇄용 PDF<span>제본용 페이지 배열</span></span>
+    </div>
+    <p class="pdfnote">※ 인쇄용 파일은 최종 발행본과 함께 생성됩니다. 9월 1일 발행 시 두 가지 모두 전달드리겠습니다.</p>
+
+    <div class="reply">
+      <h3>회의에서 정하고, 그 뒤에 반영하겠습니다</h3>
+      <p>위 네 가지와 체크리스트는 <strong>8월 24일(월) 회의에서 함께</strong> 보시면 됩니다. 미리 다 확인하지 않으셔도 괜찮습니다.</p>
+      <p>회의에서 나온 내용은 <span class="due">8월 28일(금)</span>까지 반영해 9월 1일 발행하겠습니다. 회의 후에 추가로 생각나신 부분이 있으면 그때까지 알려주셔도 됩니다.</p>
+    </div>
+  </div>
+
+  <div class="foot">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 470 120" role="img" aria-label="Next I/O">
+      <g stroke="#141A2E" stroke-width="5.5" stroke-linecap="round" fill="none">
+        <line x1="22" y1="36" x2="60" y2="60"></line><line x1="22" y1="84" x2="60" y2="60"></line><line x1="60" y1="60" x2="100" y2="36"></line><line x1="60" y1="60" x2="100" y2="84"></line>
+      </g>
+      <circle cx="22" cy="36" r="8" fill="#6FA8FF"></circle><circle cx="22" cy="84" r="8" fill="#6FA8FF"></circle>
+      <circle cx="100" cy="36" r="7" fill="none" stroke="#141A2E" stroke-width="5.5"></circle><circle cx="100" cy="84" r="7" fill="none" stroke="#141A2E" stroke-width="5.5"></circle>
+      <circle cx="60" cy="60" r="15" fill="#FBBF24"></circle>
+      <text x="150" y="78" font-family="Pretendard,'Apple SD Gothic Neo',sans-serif" font-weight="800" font-size="64" letter-spacing="-2" fill="#141A2E">Next <tspan fill="#2456E6">I/O</tspan></text>
+    </svg>
+    <div class="who">Next I/O 성대첨디공 매거진팀</div>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  var KEY='ckdisplay2609v2';
+  var boxes=[].slice.call(document.querySelectorAll('#ck input'));
+  var cnt=document.getElementById('cnt'), fill=document.getElementById('barfill');
+  var saved=[];
+  try{ saved=JSON.parse(localStorage.getItem(KEY)||'[]'); }catch(e){ saved=[]; }
+  boxes.forEach(function(b,i){ b.checked=!!saved[i]; });
+  function paint(){
+    var n=boxes.filter(function(b){return b.checked;}).length;
+    cnt.textContent=n;
+    fill.style.width=(n/boxes.length*100)+'%';
+    try{ localStorage.setItem(KEY,JSON.stringify(boxes.map(function(b){return b.checked;}))); }catch(e){}
+  }
+  boxes.forEach(function(b){ b.addEventListener('change',paint); });
+  paint();
+})();
+</script>
+</body>
+</html>
