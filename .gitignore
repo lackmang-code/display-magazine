@@ -7,3 +7,10 @@
 
 # 내부 작업 패키지 — 공개 저장소에 올리지 않는다 (build_system 소스·CLAUDE.md·학과 제공 원본 포함)
 *.zip
+
+# 원본 이미지 — 웹은 webp를 쓰고(book/phone.html 런타임 치환), 인쇄 원본은 비공개 issues\ 에 있다
+magazine/**/assets/**/*.png
+magazine/**/assets/**/*.jpg
+magazine/**/assets/**/*.jpeg
+# 표지썸네일은 png로 남긴다 — assets\ 밖이라 위 패턴에 걸리지 않음
+# (phone.html 첫 화면·카톡 미리보기가 직접 참조)
