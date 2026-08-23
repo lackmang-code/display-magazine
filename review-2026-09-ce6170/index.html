@@ -92,6 +92,39 @@
   ul.ck input:checked ~ .t{color:#9a9287;text-decoration:line-through;text-decoration-color:#cfc6b8}
   .ckfoot{font-size:13px;color:var(--sub);margin:10px 2px 0}
 
+  /* 항목별 수정 메모 */
+  ul.ck .memo{padding:0 18px 15px 52px}
+  .memo-t{appearance:none;-webkit-appearance:none;background:none;border:0;padding:0;
+          font:inherit;font-size:13.5px;color:#8a7f6d;cursor:pointer;
+          text-decoration:underline;text-underline-offset:3px}
+  .memo-t:hover{color:var(--ink)}
+  .memo-t.has{color:var(--red);font-weight:800;text-decoration:none}
+  .memo-t.has::before{content:"●";font-size:9px;margin-right:6px;vertical-align:2px}
+  .memo-b{margin-top:9px}
+  .memo-b textarea{display:block;width:100%;min-height:76px;resize:vertical;
+          font-family:inherit;font-size:14.5px;line-height:1.7;color:var(--ink);
+          background:#fffdf8;border:1px solid #d8d1c4;border-radius:6px;padding:10px 12px}
+  .memo-b textarea:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:#c3b078}
+
+  /* 적어주신 내용 모으기 */
+  .collect{background:#fff;border:1px solid var(--line);border-radius:8px;padding:20px 22px}
+  .collect label.fl{display:block;font-size:14px;font-weight:800;margin:0 0 8px}
+  .collect textarea{display:block;width:100%;resize:vertical;font-family:inherit;
+          font-size:14.5px;line-height:1.7;color:var(--ink);
+          background:#fffdf8;border:1px solid #d8d1c4;border-radius:6px;padding:10px 12px}
+  #free{min-height:76px}
+  #out{min-height:150px;background:#faf7f1;border-color:var(--line);font-size:14px}
+  .outwrap{margin-top:22px}
+  .cbtns{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+  .cbtns button,.cbtns a{flex:1 1 160px;text-align:center;border:0;border-radius:7px;
+          padding:14px 16px;font-family:inherit;font-size:15px;font-weight:800;
+          cursor:pointer;text-decoration:none;line-height:1.3}
+  #copy{background:var(--ink);color:var(--gold)}
+  #copy.done{background:var(--done);color:#fff}
+  #copy.warn{background:#8a6a12;color:#fff;font-size:13.5px}
+  .cbtns a.mailbtn{background:#fff;color:var(--ink);border:1.5px solid var(--ink);padding:12.5px 16px}
+  .cnote{font-size:13px;color:var(--sub);margin:13px 2px 0}
+
   .reply{background:var(--black);color:#fff;border-radius:8px;padding:24px 26px;margin:34px 0 0}
   .reply h3{margin:0 0 10px;font-size:16.5px;color:var(--gold);font-weight:800}
   .reply p{color:#e6e1d8;font-size:14.5px;margin:0 0 10px}
@@ -110,6 +143,8 @@
     .sched b{font-size:12px}
     p{font-size:15px}
     ul.ck label{padding:13px 15px}
+    ul.ck .memo{padding:0 15px 13px 49px}
+    .collect{padding:16px 16px}
   }
 </style>
 </head>
@@ -165,7 +200,7 @@
     </div>
 
     <h2 class="sec">회의에서 확인할 것</h2>
-    <p style="margin-bottom:14px">학과 코너 네 가지입니다. 회의 때 이 순서로 짚어 보시면 됩니다.</p>
+    <p style="margin-bottom:14px">학과 코너 네 가지입니다. 회의 때 이 순서로 짚어 보시면 됩니다. 정하신 내용은 아래 검수 체크리스트의 해당 항목에 바로 적어 두실 수 있습니다.</p>
     <div class="item">
       <h3><span class="num">1</span>연구실 소개</h3>
       <div class="cur"><span class="tag">현재 실려 있는 내용</span>
@@ -197,17 +232,32 @@
       <span class="bar"><i id="barfill"></i></span>
     </div>
     <ul class="ck" id="ck">
-      <li><label><input type="checkbox"><span class="t">표지와 목차<span class="d">제호, 3호 표기, 발행일(9월 1일), 목차 순서와 제목</span></span></label></li>
-      <li><label><input type="checkbox"><span class="t">광각 노트<span class="d">언더디스플레이카메라(UDC) 편</span></span></label></li>
-      <li><label><input type="checkbox"><span class="t">이달의 첨디공 논문<span class="d">이보람 교수님 확인 회신 내용이 제대로 반영되었는지</span></span></label></li>
-      <li><label><input type="checkbox"><span class="t">AI가 주목한 Display Tech<span class="d">HUD 편</span></span></label></li>
-      <li><label><input type="checkbox"><span class="t">주목할 연구실<span class="d">변도영 교수님 연구실 소개, 사진과 연구실 홈페이지 주소</span></span></label></li>
-      <li><label><input type="checkbox"><span class="t">논문 · 학술대회 · 특허 실적<span class="d">기준 기간 표기와 건수, 교수님 성함</span></span></label></li>
-      <li><label><input type="checkbox"><span class="t">배출인력 소개<span class="d">대상 학생, 졸업 여부 표기, 지도교수와 연구실 주소</span></span></label></li>
-      <li><label><input type="checkbox"><span class="t">학과 주요 행사<span class="d">행사명, 날짜, 장소, 지난 일정의 예정 표기 정리 여부</span></span></label></li>
-      <li><label><input type="checkbox"><span class="t">모집요강과 뒤표지<span class="d">연락처, 주소, 판권 정보</span></span></label></li>
+      <li><label><input type="checkbox"><span class="t">표지와 목차<span class="d">제호, 3호 표기, 발행일(9월 1일), 목차 순서와 제목</span></span></label><div class="memo"><button type="button" class="memo-t">수정할 내용 적기</button><div class="memo-b" hidden><textarea rows="3" placeholder="어떻게 바꿀지 적어 주세요."></textarea></div></div></li>
+      <li><label><input type="checkbox"><span class="t">광각 노트<span class="d">언더디스플레이카메라(UDC) 편</span></span></label><div class="memo"><button type="button" class="memo-t">수정할 내용 적기</button><div class="memo-b" hidden><textarea rows="3" placeholder="어떻게 바꿀지 적어 주세요."></textarea></div></div></li>
+      <li><label><input type="checkbox"><span class="t">이달의 첨디공 논문<span class="d">이보람 교수님 확인 회신 내용이 제대로 반영되었는지</span></span></label><div class="memo"><button type="button" class="memo-t">수정할 내용 적기</button><div class="memo-b" hidden><textarea rows="3" placeholder="어떻게 바꿀지 적어 주세요."></textarea></div></div></li>
+      <li><label><input type="checkbox"><span class="t">AI가 주목한 Display Tech<span class="d">HUD 편</span></span></label><div class="memo"><button type="button" class="memo-t">수정할 내용 적기</button><div class="memo-b" hidden><textarea rows="3" placeholder="어떻게 바꿀지 적어 주세요."></textarea></div></div></li>
+      <li><label><input type="checkbox"><span class="t">주목할 연구실<span class="d">변도영 교수님 연구실 소개, 사진과 연구실 홈페이지 주소</span></span></label><div class="memo"><button type="button" class="memo-t">수정할 내용 적기</button><div class="memo-b" hidden><textarea rows="3" placeholder="어떻게 바꿀지 적어 주세요."></textarea></div></div></li>
+      <li><label><input type="checkbox"><span class="t">논문 · 학술대회 · 특허 실적<span class="d">기준 기간 표기와 건수, 교수님 성함</span></span></label><div class="memo"><button type="button" class="memo-t">수정할 내용 적기</button><div class="memo-b" hidden><textarea rows="3" placeholder="어떻게 바꿀지 적어 주세요."></textarea></div></div></li>
+      <li><label><input type="checkbox"><span class="t">배출인력 소개<span class="d">대상 학생, 졸업 여부 표기, 지도교수와 연구실 주소</span></span></label><div class="memo"><button type="button" class="memo-t">수정할 내용 적기</button><div class="memo-b" hidden><textarea rows="3" placeholder="어떻게 바꿀지 적어 주세요."></textarea></div></div></li>
+      <li><label><input type="checkbox"><span class="t">학과 주요 행사<span class="d">행사명, 날짜, 장소, 지난 일정의 예정 표기 정리 여부</span></span></label><div class="memo"><button type="button" class="memo-t">수정할 내용 적기</button><div class="memo-b" hidden><textarea rows="3" placeholder="어떻게 바꿀지 적어 주세요."></textarea></div></div></li>
+      <li><label><input type="checkbox"><span class="t">모집요강과 뒤표지<span class="d">연락처, 주소, 판권 정보</span></span></label><div class="memo"><button type="button" class="memo-t">수정할 내용 적기</button><div class="memo-b" hidden><textarea rows="3" placeholder="어떻게 바꿀지 적어 주세요."></textarea></div></div></li>
       </ul>
-    <p class="ckfoot">체크 상태는 이 기기에만 저장되며, 저희 쪽으로는 전송되지 않습니다. 회의 중 표시해 두는 용도로 쓰시면 됩니다.</p>
+    <p class="ckfoot">항목마다 “수정할 내용 적기”를 누르시면 그 자리에 적으실 수 있습니다. 체크와 적으신 내용은 모두 이 기기에만 저장되고 저희 쪽으로 자동 전송되지 않습니다. 다 적으셨으면 아래 “적어주신 내용 모아보기”에서 복사하거나 메일로 보내주시면 됩니다.</p>
+
+    <h2 class="sec">적어주신 내용 모아보기</h2>
+    <div class="collect">
+      <label class="fl" for="free">그 밖에 하실 말씀</label>
+      <textarea id="free" rows="3" placeholder="위 항목에 해당하지 않는 의견을 적어 주세요."></textarea>
+      <div class="outwrap">
+        <label class="fl" for="out">모아진 내용</label>
+        <textarea id="out" readonly></textarea>
+        <div class="cbtns">
+          <button type="button" id="copy">복사하기</button>
+          <a id="mail" class="mailbtn" href="mailto:nackmann@skku.edu">메일로 보내기</a>
+        </div>
+        <p class="cnote">“복사하기”를 누르시면 위 내용이 그대로 복사됩니다. 회신 메일에 붙여넣어 주시면 됩니다. “메일로 보내기”는 쓰시는 메일 프로그램이 열리며, 내용이 길면 일부가 잘리는 경우가 있어 복사해 붙여넣으시는 편이 안전합니다.</p>
+      </div>
+    </div>
 
     <h2 class="sec">인쇄용 파일</h2>
     <div class="opens">
@@ -240,19 +290,105 @@
 
 <script>
 (function(){
-  var KEY='ckdisplay2609v2';
-  var boxes=[].slice.call(document.querySelectorAll('#ck input'));
+  var KEY='ckdisplay2609v2', MKEY='ckdisplay2609memo';
+  var NL=String.fromCharCode(10);
+  var OPEN='수정할 내용 적기', WRITTEN='수정 요청 적음';
+
+  var lis=[].slice.call(document.querySelectorAll('#ck > li'));
+  var boxes=lis.map(function(li){ return li.querySelector('input[type=checkbox]'); });
+  var areas=lis.map(function(li){ return li.querySelector('.memo-b textarea'); });
+  var toggles=lis.map(function(li){ return li.querySelector('.memo-t'); });
   var cnt=document.getElementById('cnt'), fill=document.getElementById('barfill');
-  var saved=[];
+  var free=document.getElementById('free'), out=document.getElementById('out');
+  var copyBtn=document.getElementById('copy'), mailLink=document.getElementById('mail');
+
+  var titles=lis.map(function(li){
+    var t=li.querySelector('.t').cloneNode(true);
+    var d=t.querySelector('.d'); if(d){ d.parentNode.removeChild(d); }
+    return t.textContent.trim();
+  });
+
+  var saved=[], memos={};
   try{ saved=JSON.parse(localStorage.getItem(KEY)||'[]'); }catch(e){ saved=[]; }
+  try{ memos=JSON.parse(localStorage.getItem(MKEY)||'{}')||{}; }catch(e){ memos={}; }
+  if(!memos.items){ memos.items=[]; }
+
   boxes.forEach(function(b,i){ b.checked=!!saved[i]; });
+  areas.forEach(function(a,i){ a.value=memos.items[i]||''; });
+  if(free){ free.value=memos.free||''; }
+
+  function save(){
+    try{ localStorage.setItem(KEY,JSON.stringify(boxes.map(function(b){return b.checked;}))); }catch(e){}
+    try{ localStorage.setItem(MKEY,JSON.stringify({
+      items:areas.map(function(a){ return a.value; }),
+      free:free?free.value:''
+    })); }catch(e){}
+  }
+
+  function build(){
+    var blocks=[];
+    areas.forEach(function(a,i){
+      var v=a.value.trim();
+      if(v){ blocks.push('['+titles[i]+']'+NL+v); }
+    });
+    var f=free?free.value.trim():'';
+    if(f){ blocks.push('[그 밖에]'+NL+f); }
+    if(!blocks.length){ return ''; }
+    return '첨디공 ON 9월호(3호) 검수 의견'+NL+NL+blocks.join(NL+NL)+NL;
+  }
+
   function paint(){
-    var n=boxes.filter(function(b){return b.checked;}).length;
+    var n=boxes.filter(function(b){ return b.checked; }).length;
     cnt.textContent=n;
     fill.style.width=(n/boxes.length*100)+'%';
-    try{ localStorage.setItem(KEY,JSON.stringify(boxes.map(function(b){return b.checked;}))); }catch(e){}
+    toggles.forEach(function(t,i){
+      var has=!!areas[i].value.trim();
+      t.className=has?'memo-t has':'memo-t';
+      t.textContent=has?WRITTEN:OPEN;
+    });
+    var text=build();
+    out.value=text||'아직 적으신 내용이 없습니다.';
+    out.setAttribute('data-empty',text?'0':'1');
+    mailLink.href='mailto:nackmann@skku.edu?subject='
+      +encodeURIComponent('첨디공 ON 9월호 검수 의견')
+      +'&body='+encodeURIComponent(text||'');
+    save();
   }
+
+  toggles.forEach(function(t,i){
+    t.addEventListener('click',function(){
+      var box=areas[i].parentNode;
+      if(box.hasAttribute('hidden')){ box.removeAttribute('hidden'); areas[i].focus(); }
+      else if(!areas[i].value.trim()){ box.setAttribute('hidden',''); }
+    });
+  });
+  areas.forEach(function(a){ a.addEventListener('input',paint); });
+  if(free){ free.addEventListener('input',paint); }
   boxes.forEach(function(b){ b.addEventListener('change',paint); });
+
+  copyBtn.addEventListener('click',function(){
+    if(out.getAttribute('data-empty')==='1'){ return; }
+    var flash=function(msg,ok){
+      copyBtn.textContent=msg;
+      copyBtn.className=ok?'done':'warn';
+      setTimeout(function(){ copyBtn.textContent='복사하기'; copyBtn.className=''; },2600);
+    };
+    var manual=function(){
+      out.removeAttribute('readonly');
+      out.focus(); out.select();
+      try{ out.setSelectionRange(0,999999); }catch(e){}
+      var ok=false;
+      try{ ok=document.execCommand('copy'); }catch(e){ ok=false; }
+      out.setAttribute('readonly','');
+      if(ok){ flash('복사되었습니다',true); }
+      else{ flash('내용을 선택해 두었습니다. Ctrl+C를 눌러 주세요',false); }
+    };
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(out.value).then(function(){ flash('복사되었습니다',true); },manual);
+    }else{ manual(); }
+  });
+
+  areas.forEach(function(a){ if(a.value.trim()){ a.parentNode.removeAttribute('hidden'); } });
   paint();
 })();
 </script>
