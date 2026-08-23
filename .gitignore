@@ -4,3 +4,6 @@
 **/print_single.html
 **/assets_print/
 **/*인쇄용*.pdf
+
+# 내부 작업 패키지 — 공개 저장소에 올리지 않는다 (build_system 소스·CLAUDE.md·학과 제공 원본 포함)
+*.zip
