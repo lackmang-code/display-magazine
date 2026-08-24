@@ -58,6 +58,15 @@ jobs:
               print.html|*/print.html)
                 echo "::error file=$f::print.html은 인쇄 전용입니다"; fail=1; continue ;;
               review-*|confirm-*|paper-*|minutes-*|preview-*|check-*|temp-*|tmp-*)
+                # 예외: 폴더를 접으면서 남기는 만료 안내 한 장(index.html, 4KB 미만)은 통과시킨다.
+                # 그냥 지우면 엣지 캐시(7일)가 옛 내용을 계속 내보내므로 안내로 캐시 객체를 바꾼다.
+                case "$f" in
+                  */index.html)
+                    if [ "$size" -lt 4096 ]; then
+                      echo "  통과(만료 안내): $f"
+                      continue
+                    fi ;;
+                esac
                 echo "::error file=$f::검수용 폴더는 배포하지 않습니다. 파일로 만들어 메일 첨부하세요"; fail=1; continue ;;
               *assets/*.png|*assets/*.jpg|*assets/*.jpeg|*assets/*.tif|*assets/*.tiff)
                 echo "::error file=$f::원본 이미지 금지 (book/phone은 webp만 요청합니다)"; fail=1; continue ;;
