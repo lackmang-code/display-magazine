@@ -1,0 +1,83 @@
+name: 저장소 용량 보호
+
+# 왜 있나 (2026-08-24)
+#   pre-commit 훅은 .git/hooks 에 있어 버전관리가 안 된다. 저장소를 다시 클론하면
+#   사라지고, 그때 설치를 잊으면 방어가 통째로 없어진다. ALLOW_BIG=1 로도 뚫린다.
+#   서버 쪽에서 한 번 더 본다. 클론을 새로 하든 훅을 지우든 여기는 걸린다.
+#
+#   막는 것: PDF · 압축파일 · 원본 이미지(png/jpg) · print.html · 검수 슬러그 폴더 · 2MB 초과
+#   이번 push 로 새로 들어온 파일만 본다. 과거에 이미 올라간 것은 건드리지 않는다.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 이번에 추가·수정된 파일 검사
+        run: |
+          set -u
+          BEFORE="${{ github.event.before }}"
+          if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ]              || ! git cat-file -e "$BEFORE^{commit}" 2>/dev/null; then
+            BEFORE=$(git rev-parse HEAD~1 2>/dev/null || echo "")
+          fi
+          if [ -z "$BEFORE" ]; then
+            echo "비교 기준을 찾지 못해 검사를 건너뜁니다."
+            exit 0
+          fi
+
+          FILES=$(git diff --name-only --diff-filter=ACM "$BEFORE" HEAD)
+          if [ -z "$FILES" ]; then
+            echo "검사할 파일 없음."
+            exit 0
+          fi
+
+          echo "검사 대상 $(echo "$FILES" | wc -l)개"
+          fail=0
+
+          while IFS= read -r f; do
+            [ -z "$f" ] && continue
+            [ -f "$f" ] || continue
+            size=$(wc -c < "$f")
+
+            case "$f" in
+              *.pdf)
+                echo "::error file=$f::PDF는 저장소에 올리지 않습니다 (메일 첨부로만 전달)"; fail=1; continue ;;
+              *.zip|*.7z|*.rar|*.tar|*.tar.gz|*.tgz)
+                echo "::error file=$f::압축파일 금지"; fail=1; continue ;;
+              *.psd|*.ai|*.docx|*.pptx|*.xlsx|*.hwp)
+                echo "::error file=$f::원본 작업파일은 배포 저장소에 넣지 않습니다"; fail=1; continue ;;
+              print.html|*/print.html)
+                echo "::error file=$f::print.html은 인쇄 전용입니다"; fail=1; continue ;;
+              review-*|confirm-*|paper-*|minutes-*|preview-*|check-*|temp-*|tmp-*)
+                echo "::error file=$f::검수용 폴더는 배포하지 않습니다. 파일로 만들어 메일 첨부하세요"; fail=1; continue ;;
+              *assets/*.png|*assets/*.jpg|*assets/*.jpeg|*assets/*.tif|*assets/*.tiff)
+                echo "::error file=$f::원본 이미지 금지 (book/phone은 webp만 요청합니다)"; fail=1; continue ;;
+            esac
+
+            limit=2097152
+            case "$f" in
+              *표지썸네일*.png) limit=4194304 ;;
+              *.mp4)            limit=10485760 ;;
+            esac
+            if [ "$size" -gt "$limit" ]; then
+              echo "::error file=$f::용량초과 $((size/1024))KB (한도 $((limit/1024))KB)"
+              fail=1
+            fi
+          done <<< "$FILES"
+
+          if [ "$fail" -eq 1 ]; then
+            echo ""
+            echo "올려도 되는 것: book/phone/index.html · assets/*.webp · 표지썸네일*.png · assets/*.mp4"
+            echo "올리지 않는 것: 원본 png/jpg · print.html · PDF · zip · 검수 슬러그 폴더"
+            exit 1
+          fi
+          echo "통과."
