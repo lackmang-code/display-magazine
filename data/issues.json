@@ -1,0 +1,26 @@
+{
+  "issues": [
+    {
+      "issue": 3,
+      "label": "Vol.03 · 9월",
+      "cover": "https://display-magazine.pages.dev/magazine/2026-09/%ED%91%9C%EC%A7%80%EC%8D%B8%EB%84%A4%EC%9D%BC.png",
+      "url": "https://display-magazine.pages.dev/magazine/2026-09/",
+      "alt": "첨디공 On 3호 2026. 9 표지"
+    },
+    {
+      "issue": 2,
+      "label": "Vol.02 · 8월",
+      "cover": "https://display-magazine.pages.dev/magazine/2026-08/%ED%91%9C%EC%A7%80%EC%8D%B8%EB%84%A4%EC%9D%BC.png",
+      "url": "https://display-magazine.pages.dev/magazine/2026-08/",
+      "alt": "첨디공 On 2호 2026. 8 표지"
+    },
+    {
+      "issue": 1,
+      "label": "Vol.01 · 7월",
+      "cover": "https://display-magazine.pages.dev/magazine/2026-07/%ED%91%9C%EC%A7%80%EC%8D%B8%EB%84%A4%EC%9D%BC.png",
+      "url": "https://display-magazine.pages.dev/magazine/2026-07/",
+      "alt": "첨디공 On 창간호 2026. 7 표지"
+    }
+  ],
+  "updated": "2026-09-02"
+}
